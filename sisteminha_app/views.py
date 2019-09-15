@@ -7,20 +7,29 @@ import pyodbc
 
 
 def home(request):
-    form = ClienteForm
-    if request.method == 'POST':
-        try:
-            conn = pyodbc.connect('Driver={SQL Server};'
+    
+    conn = pyodbc.connect('Driver={SQL Server};'
                       'Server=DESKTOP-BM3KC8C\SQLEXPRESS;' #servidor do banco
                       'Database=Teste;' #tabela
                       'Trusted_Connection=yes;')
+    form = ClienteForm
+    if request.method == 'POST':
+        form = ClienteForm(request.POST)
+        try:
+            
             
             cursor = conn.cursor()
-            cursor.execute(" exec selecionarDados ")
+            if form.is_valid:
+                
+                nome =  form.data['nome']
 
-            result_set = cursor.fetchall()
+                cpf = form.data['cpf']
+                cidade = form.data['cidade']
+                cursor.execute(f'exec inserirDados "{nome}","{cpf}","{cidade}" ')
+                cursor.commit()
 
-            print(result_set)
+                #result_set = cursor.fetchall()
+
                 
         finally:
             cursor.close()
