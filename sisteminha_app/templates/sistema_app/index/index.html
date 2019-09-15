@@ -86,7 +86,7 @@
 							{{ form.cidade }}
 						</div>
 						<br>
-						<button type="submit" action = '.' class="btn btn-success">Inserir</button>
+						<button type="submit" name="inserir" class="btn btn-success">Inserir</button>
 					</form>
 				</div>
 
@@ -108,10 +108,17 @@
 				<div class="cd-half-width cd-img-container img-right">
 					
 				</div> <!-- .cd-half-width.cd-img-container -->
-				<div class="cd-half-width">
-					<h2>Deletar cliente</h2>
-					
-				</div> <!-- .cd-half-width -->
+				<div class ='cd-full-width d-flex justify-content-center' >
+					<form method="post">
+						{% csrf_token %}
+						<div>
+							{{ form.idCliente }}
+						</div>
+						<br>
+						<br>
+						<button type="submit" name="deletar" class="btn btn-success">Deletar</button>
+					</form>
+				</div>
 			</li>
 			<li class="cd-bg-video">
 				
