@@ -1,12 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-<<<<<<< HEAD
 from django.shortcuts import render, redirect
 from .forms import ClienteForm
-=======
-from django.shortcuts import render,redirect
 from .forms import ClienteForm,DeleteClienteForm
->>>>>>> d3fd8a6cb416c8777e85e4a049fb5c62088c0178
 import pyodbc 
 
 
@@ -21,7 +17,6 @@ def home(request):
     form2 = DeleteClienteForm
     if request.method == 'POST':
         form = ClienteForm(request.POST)
-<<<<<<< HEAD
         try:
             
             
@@ -40,7 +35,6 @@ def home(request):
                 
         finally:
             cursor.close()
-=======
         
         if "inserir" in request.POST:
 
@@ -72,7 +66,6 @@ def home(request):
 
             finally:
                 cursor.close()
->>>>>>> d3fd8a6cb416c8777e85e4a049fb5c62088c0178
             
     return render(request,"sistema_app/index/index.html",{'form':form,'form2':form2})
 
