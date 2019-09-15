@@ -3,7 +3,6 @@ from django import forms
 
 class ClienteForm(forms.Form):
     error_css_class = 'alert alert-danger'
-    idCliente = forms.CharField(widget= forms.widgets.Input(attrs ={'class':'form-control', 'placeholder':'Id do cliente'}))
     nome = forms.CharField(widget= forms.widgets.Input(attrs ={'class':'form-control', 'placeholder':'Nome'}))
     cpf = forms.CharField(widget= forms.widgets.Input(attrs ={'class':'form-control', 'placeholder':'CPF'}))
     cidade = forms.CharField(widget= forms.widgets.Input(attrs ={'class':'form-control', 'placeholder':'Cidade'}))
@@ -27,4 +26,14 @@ class ClienteForm(forms.Form):
         if nome == None:
             self._errors['cidade'] = self.error_class(['Caixa de cidade vazia!'])
 
+        return self.cleaned_data
+
+class DeleteClienteForm(forms.Form):
+
+    idCliente = forms.CharField(widget= forms.widgets.Input(attrs ={'class':'form-control', 'placeholder':'Id do cliente'}))
+    def clean(self):
+
+        super(DeleteClienteForm, self).clean()
+        nome = self.cleaned_data.get['idCliente']
+        
         return self.cleaned_data

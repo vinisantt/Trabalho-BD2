@@ -72,7 +72,7 @@
 				</div>
 			
 				<div class ='cd-full-width d-flex justify-content-center' >
-					<form method="post">
+					<form method="post" autocomplete="off">
 						{% csrf_token %}
 						<div>
 							{{ form.nome }}
@@ -112,7 +112,7 @@
 					<form method="post">
 						{% csrf_token %}
 						<div>
-							{{ form.idCliente }}
+							{{ form2.idCliente }}
 						</div>
 						<br>
 						<br>
