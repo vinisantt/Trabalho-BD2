@@ -14,15 +14,6 @@
   <!-- ** Plugins Needed for the Project ** -->
   <!-- Bootstrap -->
 
-  <style>
-  
-	.cd-full-width{
-		width: 50%;
-  		margin: 0 auto;
-	}
-
-	
-	</style>
   
   <link rel = "shortcut icon" type = "imagem/x-icon" href = {% static 'images/icone.png' %}>
 
@@ -79,24 +70,31 @@
 				<div class="overlay2">
 					<img class="" src={% static 'images/slider/bg1.jpg' %} alt="slider">
 				</div>
+				
+				{% if form.non_field_errors %}
+                        {% for error in form.non_field_errors %}
+                        <p class="alert alert-danger">
+                            {{ error }}
+                        </p>
+                        {% endfor %}
+                  {% endif %}
 
-				<div class ='cd-full-width' >
+				<div class ='cd-full-width d-flex justify-content-center' >
 					<form method="post">
 						{% csrf_token %}
-						<div class="col-sm-10">
-							
-							<input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nome">
+						<div>
+							{{ form.nome }}
 						</div>
 						<br>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" id="formGroupExampleInput2" placeholder="CPF">
+						<div >
+							{{ form.cpf }}
 						</div>
 						<br>
-						<div class="col-sm-10">
-							<input class="form-control" id="ex3" type="text" placeholder="Cidade">
+						<div >
+							{{ form.cidade }}
 						</div>
 						<br>
-						<button type="button" class="btn btn-success">Inserir</button>
+						<button type="submit" action = '.' class="btn btn-success">Inserir</button>
 					</form>
 				</div>
 
