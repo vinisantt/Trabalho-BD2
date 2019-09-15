@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import ClienteForm
 import pyodbc 
 
@@ -9,9 +9,9 @@ import pyodbc
 def home(request):
     
     conn = pyodbc.connect('Driver={SQL Server};'
-                      'Server=DESKTOP-BM3KC8C\SQLEXPRESS;' #servidor do banco
+                      'Server=DESKTOP-0P0GI6A\SQLEXPRESS;' #servidor do banco
                       'Database=Teste;' #tabela
-                      'Trusted_Connection=yes;')
+                      'Trusted_Connection=yes;', autocommit=True)
     form = ClienteForm
     if request.method == 'POST':
         form = ClienteForm(request.POST)
@@ -27,7 +27,7 @@ def home(request):
                 cidade = form.data['cidade']
                 cursor.execute(f'exec inserirDados "{nome}","{cpf}","{cidade}" ')
                 cursor.commit()
-
+                return redirect('home')
                 #result_set = cursor.fetchall()
 
                 
