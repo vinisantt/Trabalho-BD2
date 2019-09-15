@@ -8,13 +8,19 @@ import pyodbc
 
 def home(request):
 
+    form = ClienteForm
+    form2 = DeleteClienteForm
+
     conn = pyodbc.connect('Driver={SQL Server};'
                       'Server=DESKTOP-0P0GI6A\SQLEXPRESS;' #servidor do banco
                       'Database=Teste;' #tabela
                       'Trusted_Connection=yes;', autocommit=True)
-    form = ClienteForm
-    form2 = DeleteClienteForm
+    
+    
     if request.method == 'POST':
+        form = ClienteForm(request.POST)
+        form2 = DeleteClienteForm(request.POST)
+
         if "inserir" in request.POST:
 
             try:
@@ -22,7 +28,6 @@ def home(request):
                 if form.is_valid:
                     
                     nome =  form.data['nome']
-
                     cpf = form.data['cpf']
                     cidade = form.data['cidade']
                     cursor.execute(f'exec inserirDados "{nome}","{cpf}","{cidade}" ')
@@ -58,4 +63,13 @@ def consultaBanco(request):
     banco_completo = banco.fetchall()
     return render(request, "sistema_app/index/banco.html", {'banco':banco_completo})
 
+def quantidadeTotal(request, pk):
+    conn = pyodbc.connect('Driver={SQL Server};'
+                      'Server=DESKTOP-0P0GI6A\SQLEXPRESS;' #servidor do banco
+                      'Database=Teste;' #tabela
+                      'Trusted_Connection=yes;', autocommit=True)
+    banco = conn.cursor()
+    banco.execute(f'SELECT * FROM [dbo].[QuantidadeTotal]({pk})')
+    banco_completo = banco.fetchall()
+    return render(request, "sistema_app/index/qt.html", {'banco':banco_completo})
 

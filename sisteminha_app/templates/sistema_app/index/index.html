@@ -54,6 +54,7 @@
 			height: 50%;
 			background:#c8c8c8;
 		}
+		.tabelaResultado{background: #c8c8c8;}
 	</style>
 </head>
 
@@ -130,8 +131,14 @@
 				<div class="overlay2">
 					<img class="" src={% static 'images/slider/bg3.jpg' %} alt="slider">
 				</div>
-				<div class="cd-full-width d-flex justify-content-center">
-					<h2>Consultar faturamento e quantidade</h2>
+				<div class="cd-full-width d-flex flex-column align-items-auto">
+					<section class="d-flex justify-content-center p-0">
+						<input type="text" name="" id="pegaTexto" placeholder="Digite o id do Produto!" class="rounded">
+						<button id="pegar" class="btn btn-success">Pegar!</button>
+					</section>
+					<section class="iframeSoma p-2">
+						<!-- AQUI VAI O iframeSoma -->
+					</section>
 					
 				</div> <!-- .cd-full-width -->
 
@@ -216,6 +223,19 @@
 			$("#aquitabela").append('<iframe class="tableresu" src="{% url "consultaBanco" %}" frameborder="0"></iframe>')
 		
 		}
+	})
+
+	$('#pegar').click(function(){
+		idProduto = $('#pegaTexto')[0].value;
+		url = "{% url 'quantidadeTotal' 1234 %}".replace(/1234/, idProduto);
+		if($('.tabelaResultado')[0] == undefined){
+			$(".iframeSoma").append("<iframe class='tabelaResultado rounded' src='"+url+"' frameborder='0'></iframe>");
+		} else {
+			$(".tabelarResultado")[0].remove();
+			$(".iframeSoma").append("<iframe class='tabelaResultado rounded' src='"+url+"' frameborder='0'></iframe>");
+		}
+		//window.location
+		
 	})
 </script>
 </body>
