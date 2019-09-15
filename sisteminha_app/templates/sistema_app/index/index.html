@@ -48,7 +48,13 @@
 	<link rel="apple-touch-icon-precomposed" sizes="144x144" href={% static 'img/favicon/favicon-144x144.png' %}>
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href={% static 'img/favicon/favicon-72x72.png' %}>
 	<link rel="apple-touch-icon-precomposed" href={% static 'img/favicon/favicon-54x54.png' %}>
-
+	<style>
+		.tableresu{
+			width: 75%;
+			height: 50%;
+			background:#c8c8c8;
+		}
+	</style>
 </head>
 
 <body>
@@ -96,10 +102,9 @@
 				<div class="overlay2">
 					<img class="" src={% static 'images/slider/bg2.jpg' %} alt="slider">
 				</div>
-				<div class="cd-half-width">
-					<h2>Tabela de clientes</h2>
-				</div> <!-- .cd-half-width -->
-
+				<div id="aquitabela" class="cd-full-width d-flex justify-content-center">
+					<!-- AQUI VAI O IFRAME DAS TABELAS  -->
+				</div>
 			</li>
 			<li>
 				<div class="overlay2">
@@ -125,7 +130,7 @@
 				<div class="overlay2">
 					<img class="" src={% static 'images/slider/bg3.jpg' %} alt="slider">
 				</div>
-				<div class="cd-full-width">
+				<div class="cd-full-width d-flex justify-content-center">
 					<h2>Consultar faturamento e quantidade</h2>
 					
 				</div> <!-- .cd-full-width -->
@@ -142,7 +147,7 @@
 				<span class="cd-marker item-1"></span>
 				<ul>
 					<li class="selected"><a href="#0"><i class="fa fa-database"></i> Inserir</a></li>
-					<li><a href="#0"><i class="fa fa-table"></i>Ver tabela</a></li>
+					<li class="tabelaview"><a href="#0"><i class="fa fa-table"></i>Ver tabela</a></li>
 					<li><a href="#0"><i class="fa fa-database"></i> Deletar</a></li>
 					<li><a href="#0"><i class="fa fa-table"></i> Consultar</a></li>
 				</ul>
@@ -202,7 +207,17 @@
 
 <!-- Main Script -->
 <script src={% static 'js/script.js' %}></script>
-
+<script>
+	$('.tabelaview').click(function(){
+		if($(".tableresu")[0] == undefined){
+			$("#aquitabela").append('<iframe class="tableresu" src="{% url "consultaBanco" %}" frameborder="0"></iframe>')
+		} else {
+			$(".tableresu").remove();
+			$("#aquitabela").append('<iframe class="tableresu" src="{% url "consultaBanco" %}" frameborder="0"></iframe>')
+		
+		}
+	})
+</script>
 </body>
 
 </html>

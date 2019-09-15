@@ -36,4 +36,14 @@ def home(request):
             
     return render(request,"sistema_app/index/index.html",{'form':form})
 
+def consultaBanco(request):
+    conn = pyodbc.connect('Driver={SQL Server};'
+                      'Server=DESKTOP-0P0GI6A\SQLEXPRESS;' #servidor do banco
+                      'Database=Teste;' #tabela
+                      'Trusted_Connection=yes;', autocommit=True)
+    banco = conn.cursor()
+    banco.execute('exec selecionarDados')
+    banco_completo = banco.fetchall()
+    return render(request, "sistema_app/index/banco.html", {'banco':banco_completo})
+
 
