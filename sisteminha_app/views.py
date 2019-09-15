@@ -9,33 +9,18 @@ import pyodbc
 
 def home(request):
 
-    conn = pyodbc.connect('Driver={SQL Server};'
-                      'Server=DESKTOP-0P0GI6A\SQLEXPRESS;' #servidor do banco
-                      'Database=Teste;' #tabela
-                      'Trusted_Connection=yes;', autocommit=True)
     form = ClienteForm
     form2 = DeleteClienteForm
+
+    conn = pyodbc.connect('Driver={SQL Server};'
+                      'Server=DESKTOP-BM3KC8C\SQLEXPRESS;' #servidor do banco
+                      'Database=Teste;' #tabela
+                      'Trusted_Connection=yes;', autocommit=True)
+    
     if request.method == 'POST':
         form = ClienteForm(request.POST)
-        try:
-            
-            
-            cursor = conn.cursor()
-            if form.is_valid:
-                
-                nome =  form.data['nome']
-
-                cpf = form.data['cpf']
-                cidade = form.data['cidade']
-                cursor.execute(f'exec inserirDados "{nome}","{cpf}","{cidade}" ')
-                cursor.commit()
-                return redirect('home')
-                #result_set = cursor.fetchall()
-
-                
-        finally:
-            cursor.close()
-        
+        form2 = DeleteClienteForm(request.POST)
+ 
         if "inserir" in request.POST:
 
             try:
@@ -43,7 +28,6 @@ def home(request):
                 if form.is_valid:
                     
                     nome =  form.data['nome']
-
                     cpf = form.data['cpf']
                     cidade = form.data['cidade']
                     cursor.execute(f'exec inserirDados "{nome}","{cpf}","{cidade}" ')
@@ -59,7 +43,7 @@ def home(request):
             try:
                 cursor = conn.cursor()
                 if form2.is_valid:
-                    idCliente = int(form.data['idCliente'])
+                    idCliente = int(form2.data['idCliente'])
                     cursor.execute(f'exec deletarDados "{idCliente}" ')
                     cursor.commit()
                     return redirect('home')
@@ -71,7 +55,7 @@ def home(request):
 
 def consultaBanco(request):
     conn = pyodbc.connect('Driver={SQL Server};'
-                      'Server=DESKTOP-0P0GI6A\SQLEXPRESS;' #servidor do banco
+                      'Server=DESKTOP-BM3KC8C\SQLEXPRESS;' #servidor do banco
                       'Database=Teste;' #tabela
                       'Trusted_Connection=yes;', autocommit=True)
     banco = conn.cursor()
