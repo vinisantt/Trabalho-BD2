@@ -12,7 +12,7 @@ def home(request):
     form2 = DeleteClienteForm
 
     conn = pyodbc.connect('Driver={SQL Server};'
-                      'Server=DESKTOP-0P0GI6A\SQLEXPRESS;' #servidor do banco
+                      'Server=DESKTOP-BM3KC8C\SQLEXPRESS;' #servidor do banco
                       'Database=Teste;' #tabela
                       'Trusted_Connection=yes;', autocommit=True)
     
@@ -55,7 +55,7 @@ def home(request):
 
 def consultaBanco(request):
     conn = pyodbc.connect('Driver={SQL Server};'
-                      'Server=DESKTOP-0P0GI6A\SQLEXPRESS;' #servidor do banco
+                      'Server=DESKTOP-BM3KC8C\SQLEXPRESS;' #servidor do banco
                       'Database=Teste;' #tabela
                       'Trusted_Connection=yes;', autocommit=True)
     banco = conn.cursor()
@@ -65,7 +65,7 @@ def consultaBanco(request):
 
 def quantidadeTotal(request, pk):
     conn = pyodbc.connect('Driver={SQL Server};'
-                      'Server=DESKTOP-0P0GI6A\SQLEXPRESS;' #servidor do banco
+                      'Server=DESKTOP-BM3KC8C\SQLEXPRESS;' #servidor do banco
                       'Database=Teste;' #tabela
                       'Trusted_Connection=yes;', autocommit=True)
     banco = conn.cursor()
